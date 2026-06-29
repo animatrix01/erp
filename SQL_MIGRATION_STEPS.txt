@@ -1,0 +1,107 @@
+================================================================================
+QUICK SQL MIGRATION GUIDE
+================================================================================
+
+You need to run TWO SQL migration files in phpMyAdmin to enable file uploads.
+
+================================================================================
+STEP-BY-STEP INSTRUCTIONS
+================================================================================
+
+1. OPEN PHPMYADMIN
+   → Go to: http://localhost/phpmyadmin
+   → Login with your MySQL credentials
+
+2. SELECT DATABASE
+   → Click on database name: hrms_erp (in left sidebar)
+
+3. OPEN SQL TAB
+   → Click the "SQL" tab at the top
+
+4. RUN MIGRATION 1: IDENTITY DOCUMENTS
+   
+   A. Open file: migrate_identity_file_uploads.sql
+   B. Copy ALL content (Ctrl+A, Ctrl+C)
+   C. Paste into SQL textarea in phpMyAdmin
+   D. Click "Go" button at bottom right
+   E. You should see: "Query OK" or "0 rows affected"
+   
+   ✓ This adds:
+     - aadhar_file_path, pan_file_path, etc. (VARCHAR columns)
+     - aadhar_status, pan_status, etc. (ENUM columns)
+
+5. RUN MIGRATION 2: CERTIFICATIONS
+   
+   A. Clear the SQL textarea (select all, delete)
+   B. Open file: migrate_certifications_file_uploads.sql
+   C. Copy ALL content (Ctrl+A, Ctrl+C)
+   D. Paste into SQL textarea in phpMyAdmin
+   E. Click "Go" button at bottom right
+   F. You should see: "Query OK" or "0 rows affected"
+   
+   ✓ This adds:
+     - document_file_path (VARCHAR column)
+
+6. VERIFY CHANGES
+   
+   A. Click "Structure" tab in phpMyAdmin
+   B. Select table: identity_documents
+   C. Verify you see these NEW columns:
+      - aadhar_file_path
+      - aadhar_status
+      - pan_file_path
+      - pan_status
+      - passport_file_path
+      - passport_status
+      - voter_id_file_path
+      - voter_id_status
+      - driving_license_file_path
+      - driving_license_status
+   
+   D. Go back, select table: certifications
+   E. Verify you see this NEW column:
+      - document_file_path
+
+7. DONE!
+   → Close phpMyAdmin
+   → Start your Next.js dev server: npm run dev
+   → Test file uploads!
+
+================================================================================
+SAFE TO RE-RUN
+================================================================================
+
+Both migration scripts use "IF NOT EXISTS" checks, so you can safely run them
+multiple times without creating duplicate columns or errors.
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+ERROR: "Column already exists"
+→ SOLUTION: This is fine! It means the migration was already run.
+
+ERROR: "Table doesn't exist"
+→ SOLUTION: Run the main setup.sql file first to create all tables.
+
+ERROR: "Access denied"
+→ SOLUTION: Make sure you're logged in as root or a user with ALTER privileges.
+
+================================================================================
+NEXT STEPS AFTER MIGRATION
+================================================================================
+
+1. Start development server:
+   cd d:\projects\erp-main
+   npm run dev
+
+2. Open browser:
+   http://localhost:3000
+
+3. Test Identity Documents:
+   Profile Master → Identity Documents → Upload files → Save → Refresh
+
+4. Test Certifications:
+   Profile Master → Certifications → Add → Upload files → Save → Refresh
+
+================================================================================

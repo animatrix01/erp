@@ -1,0 +1,99 @@
+===============================================================================
+  EMPLOYEE PROFILE MANAGEMENT SYSTEM - QUICK START GUIDE
+===============================================================================
+
+📋 PREREQUISITES:
+-----------------
+1. Node.js (v18+) - Download: https://nodejs.org/
+2. MySQL (v8.0+) - Must be installed and running
+3. Any code editor
+
+⚡ QUICK SETUP (5 STEPS):
+------------------------
+
+STEP 1: Install Dependencies
+   Open terminal in project folder and run:
+   > npm install
+   
+   Wait 2-5 minutes for installation to complete.
+
+STEP 2: Create MySQL Database
+   Option A - Using MySQL Command Line:
+   > mysql -u root -p
+   > CREATE DATABASE hrms_erp;
+   > exit;
+   
+   Option B - Using MySQL Workbench:
+   - Open MySQL Workbench
+   - Click "Create new schema"
+   - Name: hrms_erp
+   - Click Apply
+
+STEP 3: Configure Database Connection
+   1. Copy ".env.example" and rename it to ".env"
+   2. Edit .env file
+   3. Change DB_PASSWORD to your MySQL password
+   
+   Example:
+   DB_HOST=localhost
+   DB_USER=root
+   DB_PASSWORD=your_actual_password  ← CHANGE THIS!
+   DB_NAME=hrms_erp
+   DB_PORT=3306
+
+STEP 4: Create Database Tables
+   Run this command:
+   > npm run db:push
+   
+   ✅ You should see: "Migrations applied successfully"
+
+STEP 5: Start Application
+   > npm run dev
+   
+   ✅ Open browser: http://localhost:3000
+
+===============================================================================
+🎉 THAT'S IT! Your application should be running!
+===============================================================================
+
+🔐 AUTHENTICATION:
+------------------
+This system uses MOCK authentication (for demo).
+Use the role switcher (top-right corner) to switch between:
+- Employee (basic access)
+- HR Admin (department management)
+- Super Admin (full access)
+- Medical Staff (medical records)
+
+❌ COMMON ISSUES:
+-----------------
+
+Problem: "npm not found"
+Solution: Install Node.js, restart terminal
+
+Problem: "MySQL connection failed"  
+Solution: Check MySQL is running, verify password in .env
+
+Problem: "Port 3000 already in use"
+Solution: Run on different port: npm run dev -- -p 3001
+
+Problem: "Module not found"
+Solution: Delete node_modules folder, run npm install again
+
+📁 IMPORTANT FILES:
+-------------------
+✅ SETUP_GUIDE.md - Detailed setup instructions
+✅ package.json - Project dependencies
+✅ .env.example - Environment variables template
+✅ check-database.js - Verify database data
+
+💡 TIPS:
+--------
+- Don't share your .env file (it has your password!)
+- node_modules folder is auto-generated (don't zip it)
+- Use VS Code for best development experience
+- Check SETUP_GUIDE.md for detailed documentation
+
+===============================================================================
+Need help? Check SETUP_GUIDE.md for detailed troubleshooting!
+===============================================================================
